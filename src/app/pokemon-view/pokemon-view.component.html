@@ -1,0 +1,97 @@
+<ng-container *ngIf="pokemon">
+    <div class="container">
+        <i class="bi bi-arrow-left-square-fill" [routerLink]="['**']" style="align-items: left; font-size: 36px;"></i>
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mt-2" style="margin-bottom: 10px;">
+                            <h1>{{pokemon.name | titlecase}}</h1>
+                            <h5>Type:</h5>
+                            <span *ngFor="let type of pokemon.types"
+                                style="border: 1px solid;margin: 2px;border-radius: 5px;">
+                                {{type.type.name | titlecase}}
+                            </span>
+                        
+                        </div>
+
+                        <ul style="width: 20rem;">
+                            <li>Experience <b class="float-end">{{pokemon.base_experience}}</b></li>
+                            <li>Height <b class="float-end">{{pokemon.height}}</b></li>
+                            <li>Weight <b class="float-end">{{pokemon.weight}}</b></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{pokemon.id}}.png"
+                            alt="" class="img-fluid d-block mx-auto" style="width: 300px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+
+
+                <div class="row">
+                    <div *ngFor="let evolution of pokemon.evolutions" class="col-sm mb-3">
+                        <div class="card" [routerLink]="['/view', evolution.name]">
+                            <div class="card-body">
+                                <h4 class="card-title text-center mb-3">{{evolution.name | titlecase}}</h4>
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{evolution.id}}.png"
+                                    alt="" class="img-fluid d-block mx-auto" style="width: 150px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">Stats</h4>
+                        <div *ngFor="let stat of pokemon.stats" class="row mt-3">
+                            <div class="col-sm-2">
+                                <h6 class="text-sm-end mt-1">{{stat.stat.name | titlecase}}</h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="progress" style="height: 30px">
+                                    <div class="progress-bar" role="progressbar" style="height: 30px;"
+                                        [style.width]="stat.base_stat + '%'">
+                                        <b>{{stat.base_stat}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">Abilities</h4>
+                    </div>
+                    <ul>
+                        <li *ngFor="let ability of pokemon.abilities">
+                            {{ability.ability.name | titlecase}}
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">Moves</h4>
+                    </div>
+                    <ul>
+                        <li *ngFor="let move of pokemon.moves">
+                            {{move.move.name | titlecase}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-container>
